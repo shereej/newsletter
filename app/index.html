@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html>
+<title>UCW-Tigers Newsletter</title>
+<!--Tigers newsletter - code by shereej ponmily-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://cdn.quilljs.com/1.0.0/quill.snow.css" rel="stylesheet">
+<style>
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
+.w3-sidebar {
+  z-index: 3;
+  width: 250px;
+  top: 43px;
+  bottom: 0;
+  height: inherit;
+}
+.disabled{
+    opacity: 0.5;
+}
+#editor-container, #editor-container, 
+#editor-container-bup, #editor-container-opp, 
+#editor-container-achv, #editor-container-pland,
+#editor-container-technews, #editor-container-htips {
+  height: 375px;
+}
+.input_fields_wrap > div {
+    padding: 20px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+a.remove_field {
+    color: #a90fc3;
+}
+</style>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
+<script src="https://cdn.quilljs.com/1.0.0/quill.js"></script>
+<script>
+  $(document).ready(function() {
+
+    //Add dynamic fields
+    var max_fields      = 20; //maximum input boxes allowed
+    var wrapper         = $(".input_fields_wrap"); //Fields wrapper
+    var add_button      = $(".add_field_button"); //Add button ID
+    
+    var x = 1; //initlal text box count
+    $(add_button).click(function(e){ //on add input button click
+        e.preventDefault();
+        if(x < max_fields){ //max input box allowed
+            x++; //text box increment
+            $(wrapper).append('<div><input class="w3-input w3-quarter" type="text" name="number" placeholder="Number"><input class="w3-input" type="text" name="desc" placeholder="Description"><a href="#" class="remove_field w3-button">Remove</a></div>');                  
+            //$(wrapper).append('<div><input type="text" name="mytext[]"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
+        }
+    });
+    
+    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+        e.preventDefault(); $(this).parent('div').remove(); x--;
+    });
+
+
+    
+    $('#uploadForm').submit(function() {
+        $("#status").empty().text("File is uploading...");        
+        $(this).ajaxSubmit({
+            error: function(xhr) {
+                status('Error: ' + xhr.status);
+            },
+            success: function(response) {
+                console.log(response)
+                $("#status").empty().text(response);
+            }
+        });
+        return false;
+    });
+    //upload business article bg image
+    $('#uploadbuimage').submit(function() {
+        $("#statusbu").empty().text("File is uploading...");        
+        $(this).ajaxSubmit({
+            error: function(xhr) {
+                status('Error: ' + xhr.status);
+            },
+            success: function(response) {
+                console.log(response)
+                $("#statusbu").empty().text(response);
+            }
+        });
+        return false;
+    });
+    //upload business updates bg image
+    $('#uploadbupimage').submit(function() {
+        $("#statusbup").empty().text("File is uploading...");        
+        $(this).ajaxSubmit({
+            error: function(xhr) {
+                status('Error: ' + xhr.status);
+            },
+            success: function(response) {
+                console.log(response)
+                $("#statusbup").empty().text(response);
+            }
+        });
+        return false;
+    });
+    //upload planned activities bg image
+    $('#uploadplanimage').submit(function() {
+        $("#statusp").empty().text("File is uploading...");        
+        $(this).ajaxSubmit({
+            error: function(xhr) {
+                status('Error: ' + xhr.status);
+            },
+            success: function(response) {
+                console.log(response)
+                $("#statusp").empty().text(response);
+            }
+        });
+        return false;
+    });
+
+   //upload project statistics bg image
+    $('#uploadpsimage').submit(function() {
+        $("#statusps").empty().text("File is uploading...");        
+        $(this).ajaxSubmit({
+            error: function(xhr) {
+                status('Error: ' + xhr.status);
+            },
+            success: function(response) {
+                console.log(response)
+                $("#statusps").empty().text(response);
+            }
+        });
+        return false;
+    });
+
+    //upload tech news bg image
+    $('#uploadTNimage').submit(function() {
+        $("#statustn").empty().text("File is uploading...");        
+        $(this).ajaxSubmit({
+            error: function(xhr) {
+                status('Error: ' + xhr.status);
+            },
+            success: function(response) {
+                console.log(response)
+                $("#statustn").empty().text(response);
+            }
+        });
+        return false;
+    });
+
+    //upload health tips bg image
+    $('#uploadHTimage').submit(function() {
+        $("#statusht").empty().text("File is uploading...");        
+        $(this).ajaxSubmit({
+            error: function(xhr) {
+                status('Error: ' + xhr.status);
+            },
+            success: function(response) {
+                console.log(response)
+                $("#statusht").empty().text(response);
+            }
+        });
+        return false;
+    });
+
+    //upload team image
+    $('#uploadTSimage').submit(function() {
+        $("#statusts").empty().text("File is uploading...");        
+        $(this).ajaxSubmit({
+            error: function(xhr) {
+                status('Error: ' + xhr.status);
+            },
+            success: function(response) {
+                console.log(response)
+                $("#statusts").empty().text(response);
+            }
+        });
+        return false;
+    });
+
+//statusbd
+
+$('#uploadBdayimage').submit(function() {
+        $("#statusbd").empty().text("File is uploading...");
+        $(this).ajaxSubmit({
+            error: function(xhr) {
+          status('Error: ' + xhr.status);
+            },
+            success: function(response) {
+                console.log(response)
+            $("#statusbd").empty().text(response);
+            }
+    });
+    return false;
+});
+
+//statusan
+//uploadAnivimage uploadBdayimage
+
+$('#uploadAnivimage').submit(function() {
+        $("#statusan").empty().text("File is uploading...");
+        $(this).ajaxSubmit({
+            error: function(xhr) {
+                status('Error: ' + xhr.status);
+            },
+            success: function(response) {
+                console.log(response)
+            $("#statusan").empty().text(response);
+            }
+    });
+    return false;
+});
+
+
+    $("#bodyData").click(function(){
+        //get authored data
+        if(!$(this).hasClass('disabled')){
+
+            var title = $('#docTitle').val(),
+            butxtcolor = $('#buTxtcolor').val(),            
+            bnrBrdTopColr = $('#topBrdrColr').val(),
+
+            //business article
+            bubgcolor = $('#bubgcolor').val(),
+            buTopBdrColr = $('#buTopBrdrColr').val(),
+            b_title = $('#buTitle').val(),
+            b_date = $('#buMonth').val(),
+            b_author = $('#buAuthor').val(),
+            b_data = $('#editor-container>div').html(),
+            
+            //business updates
+            bup_Txtcolor = $('#bupTxtcolor').val(),
+            bup_topBrdColr = $('#bupTopBrdrColr').val(),
+            bup_Title = $('#bupTitle').val(),
+            bup_data = $('#editor-container-bup>div').html(),
+            opp_data = $('#editor-container-opp>div').html(),
+            achv_data = $('#editor-container-achv>div').html(),            
+            opp_Title= $('#oppTitle1').val()+"./"+
+                         $('#oppTitle2').val()+"./"+
+                         $('#oppTitle3').val(),
+            achv_Title = $('#achvTitle').val(),
+            bup_bgcolor = $('#bupbgcolor').val(),
+
+            //planned updates
+            pbgcolor = $('#pbgcolor').val(),
+            pTxtColr = $('#pTxtColr').val(),
+            pTBColr = $('#pTBColr').val(),
+            pTitle = $('#pTitle').val(),
+            plan_data = $('#editor-container-pland>div').html(),
+
+            //project statistics            
+            psbgcolor = $('#psbgcolor').val(),
+            psTxtColr = $('#psTxtColr').val(),
+            psTBColr = $('#psTBColr').val(),
+            psTitle = $('#psTitle').val(),
+            psDfa = $('#psDfa').val(),
+            psAttrition = $('#psAttrition').val(),
+
+
+            //technical newsletter
+            
+            tnbgcolor = $('#tnbgcolor').val(),
+            tnTxtColr = $('#tnTxtColr').val(),
+            tnTBColr = $('#tnTBColr').val(),
+            tnTitle = $('#tnTitle').val(),
+            tnAuthor = $('#tnAuthor').val(),
+            tn_data = $('#editor-container-technews>div').html(),
+
+
+            //Health tips
+            //
+            htbgcolor = $('#htbgcolor').val(),
+            htTxtColr = $('#htTxtColr').val(),
+            htTBColr = $('#htTBColr').val(),
+            htTitle = $('#htTitle').val(),
+            ht_data = $('#editor-container-htips>div').html(),
+
+            //Team Image
+            tsTBColr = $('#tsTBColr').val(),
+
+            //Birthday Anniversary
+            bdTxtColr = $('#bdTxtColr').val(),
+            bdTBColr = $('#bdTBColr').val(),
+            bdbgColr = $('#bdbgColr').val(),
+            
+            //Footer
+            //ftbgcolor ftTxtColr ftEmail ftCncpt ftExecn
+            ftbgcolor = $('#ftbgcolor').val(),
+            ftTxtColr = $('#ftTxtColr').val(),
+            ftEmail = $('#ftEmail').val(),
+            ftCncpt = $('#ftCncpt').val(),
+            ftExecn = $('#ftExecn').val();
+
+            var psmulti = [];
+
+            var psNum ='', psDesc='';
+            $("#psmulti div").each(function(index,elemnt) {              
+                var ps = {};
+                $("#psmulti div").eq(index).children('input').each(function (i,element) {    
+                    
+                    if(element.name=="number"){
+                      ps.name = element.value;
+                    }                    
+                    else if(element.name="desc"){
+                      ps.desc = element.value;
+                      if(element.value!=""){
+                        psmulti.push(ps);
+                      }                      
+                    }
+                    
+                });                
+            });
+            
+            //create a new newsletter object with data binded to send server
+            let nwltrObj = {
+                title : title,
+                butxtcolor: butxtcolor,
+                bnrtopclr: bnrBrdTopColr,
+                butopclr: buTopBdrColr,
+                bubgcolor : bubgcolor,
+                btitle : b_title,
+                bdate : b_date,
+                bdata : b_data,
+                bauthor: b_author,
+                buptxtcolr: bup_Txtcolor,
+                butbcolr: bup_topBrdColr,
+                buptitle: bup_Title,
+                opptitle: opp_Title,
+                achvtitle: achv_Title,
+                bupbgcolor: bup_bgcolor,
+                bupdata: bup_data,
+                oppdata: opp_data,
+                achvdata: achv_data,
+                plandata: plan_data,
+                ptxtcolor: pTxtColr,
+                pbrdcolor: pTBColr,
+                ptitle: pTitle,
+                pbgcolor: pbgcolor,
+                psbgcolor: psbgcolor,
+                pstxtcolr: psTxtColr,
+                pstbcolor: psTBColr,
+                pstitle: psTitle,
+                psdfa: psDfa,
+                psattrition: psAttrition,
+                pslist: psmulti,
+                tnbgcolor: tnbgcolor,
+                tntxtcolor: tnTxtColr,
+                tntbcolor: tnTBColr,
+                tntitle: tnTitle,
+                thauthor: tnAuthor,
+                tndata: tn_data,
+                htbgcolor: htbgcolor,
+                httxtcolor: htTxtColr,
+                httbcolor: htTBColr,
+                httitle: htTitle,
+                htdata: ht_data,
+                tstbcolor: tsTBColr,
+                bdtxtcolor: bdTxtColr,
+                bdtbcolor: bdTBColr,
+                bdbgcolor: bdbgColr,
+                ftbgcolr: ftbgcolor,
+                fttxtcolr: ftTxtColr,
+                ftemail: ftEmail,
+                ftconcpt: ftCncpt,
+                ftexecu: ftExecn
+
+            };
+            $('#uploadForm, #uploadbuimage, #uploadbupimage, #uploadplanimage, #uploadpsimage, #uploadTNimage, #uploadHTimage, #uploadTSimage, #uploadAnivimage, #uploadBdayimage').submit();
+            $.ajax({
+                url: "/postform", 
+                type: "POST",
+                data: nwltrObj,
+                error: function(xhr,status,error){
+                    console.log(status);
+                },
+                success: function(result,status,xhr){
+                $("#message").html('Newsletter generated!');
+                //$("#bodyData").addClass('disabled');
+                $("#preview").removeClass('disabled');
+                //console.log('success'+status);
+            }});
+        }
+            
+        return false;
+    });
+    $("#preview").click(function(){
+        if(!$(this).hasClass('disabled')){
+            return true;
+        }else{
+            return false;
+        }
+    });
+});
+</script>
+<body>
+
+<!-- Navbar -->
+<div class="w3-top">
+  <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
+    <a class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme-l1" href="javascript:void(0)" onclick="w3_open()"><i class="fa fa-bars"></i></a>
+    <a href="#" class="w3-bar-item w3-button w3-theme-l1">Logo</a>
+    <!--<a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">About</a>
+    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Values</a>
+    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">News</a>
+    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Contact</a>
+    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-white">Clients</a>
+    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-white">Partners</a>-->
+  </div>
+</div>
+
+<!-- Sidebar -->
+<nav class="w3-sidebar w3-bar-block w3-collapse w3-large w3-theme-l5 w3-animate-left" id="mySidebar">
+  <a href="javascript:void(0)" onclick="w3_close()" class="w3-right w3-xlarge w3-padding-large w3-hover-black w3-hide-large" title="Close Menu">
+    <i class="fa fa-remove"></i>
+  </a>
+  <h4 class="w3-bar-item"><b>Menu</b></h4>
+  <a class="w3-bar-item w3-button w3-hover-black" href="#head">Head Section</a>
+  <a class="w3-bar-item w3-button w3-hover-black" href="#body">Header</a>
+  <a class="w3-bar-item w3-button w3-hover-black" href="#bhead">Business Article</a>
+  <a class="w3-bar-item w3-button w3-hover-black" href="#bphead">Business Updates</a>
+  <a class="w3-bar-item w3-button w3-hover-black" href="#plannedAct">Planned Activities</a>
+  <a class="w3-bar-item w3-button w3-hover-black" href="#pjtStat">Project Statistics</a>
+  <a class="w3-bar-item w3-button w3-hover-black" href="#techNews">Technical Newsletter</a>
+  <a class="w3-bar-item w3-button w3-hover-black" href="#htips">Health Tips</a>
+  <a class="w3-bar-item w3-button w3-hover-black" href="#teamimg">Team Photo</a>
+  <a class="w3-bar-item w3-button w3-hover-black" href="#banda">Birthday and Aniiversary</a>
+  <a class="w3-bar-item w3-button w3-hover-black" href="#footer">Footer</a>
+  
+</nav>
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- Main content: shift it to the right by 250 pixels when the sidebar is visible -->
+<div class="w3-main" style="margin-left:250px">
+
+
+  <div class="w3-row w3-padding-64">
+    <div class="w3-container">
+      <h1 class="w3-text-teal" id="head">Head Section</h1>
+      
+            <form class="w3-panel w3-card-4">
+                <h2>Update document title of the Newsletter </h2>
+                <p><input class="w3-input" type="text" value="" id="docTitle" placeholder="Title - example 'Newsletter - Januvary 2018'"></p>
+                
+            </form>
+    </div>
+  </div>
+
+  
+
+  <div class="w3-row w3-padding-64">
+    <div class="w3-container">
+      <h1 class="w3-text-teal" id="body">Header of the Newsletter</h1>        
+        
+      <form id="uploadForm"
+            class="w3-panel w3-card-4"
+            enctype="multipart/form-data"
+            action="/uploadimage"
+            method="post">
+        <h2>Upload the banner image</h2>
+        <p><input class="w3-input" type="text" id="topBrdrColr" placeholder="Border top color example : #eaeaea"></p>     
+        <p><input class="w3-third w3-input" type="file" name="headerfile" />
+        <input class="w3-third w3-input w3-btn w3-black" type="submit" value="Upload Image" name="submit"></p>
+        <p><span id = "status" class="w3-btn"></span></p>
+      </form>
+
+      </div>
+  </div>
+<!--Business Article-->
+  <div class="w3-row w3-padding-64">
+    <div class="w3-container">
+      <h1 class="w3-text-teal" id="bhead">Business Article Section</h1>
+      
+            <form id="uploadbuimage"
+                  class="w3-panel w3-card-4"
+                  enctype="multipart/form-data"
+                  action="/uploadimage"
+                  method="post">
+              <h2>Upload the background image</h2>
+              <p>Update background color if the image is not authored</p>
+              <p><input class="w3-input" type="text" id="bubgcolor" placeholder="Background color example: #fa5e5f"></p>
+              <p>Upload PNG images for auto opacity!</p>
+              <p><input class="w3-third w3-input" type="file" name="bubgfile" />
+              <input class="w3-third w3-input w3-btn w3-black" type="submit" value="Upload Image" name="submit"></p>
+              <p><span id = "statusbu" class="w3-btn"></span></p>
+            </form>
+
+            <form class="w3-panel w3-card-4">
+                <h2>Fill Business Article</h2>  
+                <p><input class="w3-input" type="text" id="buTxtcolor" placeholder="Text color for heading example: #fa5e5f"></p>
+                <p><input class="w3-input" type="text" value="" id="buTopBrdrColr" placeholder="Border top color example : #eaeaea"></p>
+                <p><input class="w3-input" type="text" value="" id="buTitle" placeholder="Title"></p>
+                <p><input class="w3-input" type="text" id="buMonth" placeholder="Month Year"></p>
+                <p><input class="w3-input" type="text" id="buAuthor" placeholder="Author Name"></p>
+                <p><div id="editor-container"></div></p>
+                
+            </form>
+    </div>
+    
+  </div>
+
+<!--Business Article ends -->
+
+
+<!--Business Updates-->
+  <div class="w3-row w3-padding-64">
+    <div class="w3-container">
+      <h1 class="w3-text-teal" id="bphead">Business Updates Section</h1>
+      
+            <form id="uploadbupimage"
+                  class="w3-panel w3-card-4"
+                  enctype="multipart/form-data"
+                  action="/uploadimage"
+                  method="post">
+              <h2>Upload the background image</h2>
+              <p>Update background color if the image is not authored</p>
+              <p><input class="w3-input" type="text" id="bupbgcolor" placeholder="Background color example: #fa5e5f"></p>
+              <p>Upload PNG images for auto opacity!</p>
+              <p><input class="w3-third w3-input" type="file" name="bupbgfile" />
+              <input class="w3-third w3-input w3-btn w3-black" type="submit" value="Upload Image" name="submit"></p>
+              <p><span id = "statusbup" class="w3-btn"></span></p>
+            </form>
+
+            <form class="w3-panel w3-card-4">
+                <h2>Fill Business Updates</h2>  
+                <p><input class="w3-input" type="text" id="bupTxtcolor" placeholder="Text color for heading example: #fa5e5f"></p>
+                <p><input class="w3-input" type="text" value="" id="bupTopBrdrColr" placeholder="Border top color example : #eaeaea"></p>
+                <p><input class="w3-input" type="text" value="" id="bupTitle" placeholder="Title"></p>                
+                <p><div id="editor-container-bup"></div></p>
+                <br/>
+                <h2>Fill Opportunities</h2>
+                <p><input class="w3-input" type="text" value="" id="oppTitle1" placeholder="Title - First Line"></p>
+                <p><input class="w3-input" type="text" id="oppTitle2" placeholder="Title - Second Line"></p>
+                <p><input class="w3-input" type="text" id="oppTitle3" placeholder="Title - Third Line"></p>
+                <p><div id="editor-container-opp"></div></p>
+                <br/>
+                <h2>Fill Achieved</h2>
+                <p><input class="w3-input" type="text" value="" id="achvTitle" placeholder="Title"></p>
+                <p><div id="editor-container-achv"></div></p>
+            </form>
+    </div>
+    
+  </div>
+
+<!--Business Updates ends -->
+
+
+<!--Planned Activities-->
+  <div class="w3-row w3-padding-64">
+    <div class="w3-container">
+      <h1 class="w3-text-teal" id="plannedAct">Planned Project activities</h1>
+      
+            <form id="uploadplanimage"
+                  class="w3-panel w3-card-4"
+                  enctype="multipart/form-data"
+                  action="/uploadimage"
+                  method="post">
+              <h2>Upload the background image</h2> 
+              <p>Update background color if the image is not authored</p>
+              <p><input class="w3-input" type="text" id="pbgcolor" placeholder="Background color example: #fa5e5f"></p>
+              <p>Upload PNG images for auto opacity!</p>
+              <p><input class="w3-third w3-input" type="file" name="pbgfile" />
+              <input class="w3-third w3-input w3-btn w3-black" type="submit" value="Upload Image" name="submit"></p>
+              <p><span id = "statusp" class="w3-btn"></span></p>
+            </form>
+
+            <form class="w3-panel w3-card-4">
+                <h2>Fill Planned Project activities</h2>  
+                <p><input class="w3-input" type="text" id="pTxtColr" placeholder="Text color for heading example: #fa5e5f"></p>
+                <p><input class="w3-input" type="text" value="" id="pTBColr" placeholder="Border top color example : #eaeaea"></p>
+                <p><input class="w3-input" type="text" value="" id="pTitle" placeholder="Title"></p>
+                <p><div id="editor-container-pland"></div></p>
+                
+            </form>
+    </div>
+    
+  </div>
+
+<!--Planned Activities ends -->
+
+
+<!--Project Statistics-->
+  <div class="w3-row w3-padding-64">
+    <div class="w3-container">
+      <h1 class="w3-text-teal" id="pjtStat">Project Statistics</h1>
+      
+            <form id="uploadpsimage"
+                  class="w3-panel w3-card-4"
+                  enctype="multipart/form-data"
+                  action="/uploadimage"
+                  method="post">
+              <h2>Upload the background image</h2> 
+              <p>Update background color if the image is not authored</p>
+              <p><input class="w3-input" type="text" id="psbgcolor" placeholder="Background color example: #fa5e5f"></p>
+              <p>Upload PNG images for auto opacity!</p>
+              <p><input class="w3-third w3-input" type="file" name="psbgfile" />
+              <input class="w3-third w3-input w3-btn w3-black" type="submit" value="Upload Image" name="submit"></p>
+              <p><span id = "statusps" class="w3-btn"></span></p>
+            </form>
+
+            <form class="w3-panel w3-card-4">
+                <h2>Fill Project Statistics</h2>
+                <p><input class="w3-input" type="text" id="psTxtColr" placeholder="Text color for heading example: #fa5e5f"></p>
+                <p><input class="w3-input" type="text" value="" id="psTBColr" placeholder="Border top color example : #eaeaea"></p>
+                <p><input class="w3-input" type="text" value="" id="psTitle" placeholder="Title"></p>
+                <p><input class="w3-input" type="text" value="" id="psDfa" placeholder="DFA"></p>
+                <p><input class="w3-input" type="text" value="" id="psAttrition" placeholder="Attrition rate in %"></p>
+                <div class="input_fields_wrap" id="psmulti">                  
+                  <div><input class="w3-input w3-quarter" type="text" name="number" placeholder="Number"><input class="w3-input" type="text" name="desc" placeholder="Description"></div>                  
+                </div>
+                <button class="add_field_button w3-btn w3-third w3-black">Add More Fields</button>
+            </form>
+    </div>
+    
+  </div>
+
+<!--Planned Activities ends -->
+
+<!-- Technical Newsletter-->
+
+  <div class="w3-row w3-padding-64">
+    <div class="w3-container">
+      <h1 class="w3-text-teal" id="techNews">Technical Newsletter</h1>
+      
+            <form id="uploadTNimage"
+                  class="w3-panel w3-card-4"
+                  enctype="multipart/form-data"
+                  action="/uploadimage"
+                  method="post">
+              <h2>Upload the background image</h2> 
+              <p>Update background color if the image is not authored</p>
+              <p><input class="w3-input" type="text" id="tnbgcolor" placeholder="Background color example: #fa5e5f"></p>
+              <p>Upload PNG images for auto opacity!</p>
+              <p><input class="w3-third w3-input" type="file" name="tnbgfile" />
+              <input class="w3-third w3-input w3-btn w3-black" type="submit" value="Upload Image" name="submit"></p>
+              <p><span id = "statustn" class="w3-btn"></span></p>
+            </form>
+
+            <form class="w3-panel w3-card-4">
+                <h2>Fill Technical Newsletter</h2>  
+                <p><input class="w3-input" type="text" id="tnTxtColr" placeholder="Text color for heading example: #fa5e5f"></p>
+                <p><input class="w3-input" type="text" value="" id="tnTBColr" placeholder="Border top color example : #eaeaea"></p>
+                <p><input class="w3-input" type="text" value="" id="tnTitle" placeholder="Title"></p>
+                <p><input class="w3-input" type="text" value="" id="tnAuthor" placeholder="Author"></p>
+                <p><div id="editor-container-technews"></div></p>
+                
+            </form>
+    </div>
+    
+  </div>
+<!-- Technical Newsletter Ends-->
+
+<!--Headlth tips-->
+
+  <div class="w3-row w3-padding-64">
+    <div class="w3-container">
+      <h1 class="w3-text-teal" id="htips">Health Tips</h1>      
+            <form id="uploadHTimage"
+                  class="w3-panel w3-card-4"
+                  enctype="multipart/form-data"
+                  action="/uploadimage"
+                  method="post">
+              <h2>Upload the background image</h2>
+              <p>Update background color if the image is not authored</p>
+              <p><input class="w3-input" type="text" id="htbgcolor" placeholder="Background color example: #fa5e5f"></p>
+              <p>Upload PNG images for auto opacity!</p>
+              <p><input class="w3-third w3-input" type="file" name="htbgfile" />
+              <input class="w3-third w3-input w3-btn w3-black" type="submit" value="Upload Image" name="submit"></p>
+              <p><span id = "statusht" class="w3-btn"></span></p>
+            </form>
+            <form class="w3-panel w3-card-4">
+                <h2>Fill Health Tips</h2>  
+                <p><input class="w3-input" type="text" id="htTxtColr" placeholder="Text color for heading example: #fa5e5f"></p>
+                <p><input class="w3-input" type="text" value="" id="htTBColr" placeholder="Border top color example : #eaeaea"></p>
+                <p><input class="w3-input" type="text" value="" id="htTitle" placeholder="Title"></p>
+                <p><div id="editor-container-htips"></div></p>                
+            </form>
+    </div>
+    
+  </div>
+<!--Headlth tips ends-->
+
+<!--Team Image-->
+
+  <div class="w3-row w3-padding-64">
+    <div class="w3-container">
+      <h1 class="w3-text-teal" id="teamimg">Team Image</h1>      
+            <form id="uploadTSimage"
+                  class="w3-panel w3-card-4"
+                  enctype="multipart/form-data"
+                  action="/uploadimage"
+                  method="post">
+              <h2>Upload the Team image</h2>
+              <p><input class="w3-input" type="text" value="" id="tsTBColr" placeholder="Border top color example : #eaeaea"></p>
+              <p><input class="w3-third w3-input" type="file" name="tsbgfile" />
+              <input class="w3-third w3-input w3-btn w3-black" type="submit" value="Upload Image" name="submit"></p>
+              <p><span id = "statusts" class="w3-btn"></span></p>
+            </form>
+    </div>
+    
+  </div>
+<!--Headlth tips ends-->
+
+<!-- Birthday and Anniversary-->
+<div class="w3-row w3-padding-64">
+    <div class="w3-container">
+      <h1 class="w3-text-teal" id="banda">Birthday and Anniversary</h1> 
+            <form class="w3-panel w3-card-4">
+                <p><input class="w3-input" type="text" id="bdTxtColr" placeholder="Text color example: #fa5e5f"></p>
+                <p><input class="w3-input" type="text" value="" id="bdTBColr" placeholder="Border top color example : #eaeaea"></p>
+                <p><input class="w3-input" type="text" value="" id="bdbgColr" placeholder="Background color example : #eaeaea"></p>
+                     
+            </form>     
+            
+
+    <form id="uploadBdayimage"
+          class="w3-panel w3-card-4"
+          enctype="multipart/form-data"
+          action="/api/bday/photo"
+          method="post">
+          <h2>Upload the Bithday people image</h2>
+      <p><input class="w3-input" type="file" name="userPhoto" /></p>
+      <p><input class="w3-input" type="text" name="name" placeholder="Name - MMM DD"/></p>
+      <p><input class="w3-input" type="file" name="userPhoto" /></p>
+      <p><input class="w3-input" type="text" name="name" placeholder="Name - MMM DD"/></p>
+      <p><input class="w3-input" type="file" name="userPhoto" /></p>
+      <p><input class="w3-input" type="text" name="name" placeholder="Name - MMM DD"/></p>
+      <p><input class="w3-input" type="file" name="userPhoto" /></p>
+      <p><input class="w3-input" type="text" name="name" placeholder="Name - MMM DD"/></p>
+      <p><input class="w3-input" type="file" name="userPhoto" /></p>
+      <p><input class="w3-input" type="text" name="name" placeholder="Name - MMM DD"/></p>
+      <p><input class="w3-input" type="file" name="userPhoto" /></p>
+      <p><input class="w3-input" type="text" name="name" placeholder="Name - MMM DD"/></p>
+      <p><input class="w3-input" type="file" name="userPhoto" /></p>
+      <p><input class="w3-input" type="text" name="name" placeholder="Name - MMM DD"/></p>
+      
+      <p><input class="w3-quarter w3-input w3-btn w3-black" type="submit" value="Upload Image" name="submit"></p>
+      <p><span class="w3-btn" id="statusbd"></span></p>
+    </form>
+
+
+    <form id="uploadAnivimage"
+          class="w3-panel w3-card-4"
+          enctype="multipart/form-data"
+          action="/api/anvi/photo"
+          method="post">
+      <h2>Upload the Anniversary people image</h2>
+      <p><input class="w3-input" type="file" name="userPhoto2" /></p>
+      <p><input class="w3-input" type="text" name="name2" placeholder="Name - number of years"/></p>
+      <p><input class="w3-input" type="file" name="userPhoto2" /></p>
+      <p><input class="w3-input" type="text" name="name2" placeholder="Name - number of years"/></p>
+      <p><input class="w3-input" type="file" name="userPhoto2" /></p>
+      <p><input class="w3-input" type="text" name="name2" placeholder="Name - number of years"/></p>
+      <p><input class="w3-input" type="file" name="userPhoto2" /></p>
+      <p><input class="w3-input" type="text" name="name2" placeholder="Name - number of years"/></p>
+      <p><input class="w3-input" type="file" name="userPhoto2" /></p>
+      <p><input class="w3-input" type="text" name="name2" placeholder="Name - number of years"/></p>
+      <p><input class="w3-input" type="file" name="userPhoto2" /></p>
+      <p><input class="w3-input" type="text" name="name2" placeholder="Name - number of years"/></p>
+      <p><input class="w3-input" type="file" name="userPhoto2" /></p>
+      <p><input class="w3-input" type="text" name="name2" placeholder="Name - number of years"/></p>
+      
+      <p><input class="w3-quarter w3-input w3-btn w3-black" type="submit" value="Upload Image" name="submit"></p>
+      <p><span class="w3-btn" id="statusan"></span></p>
+    </form>
+
+
+
+    </div>
+    
+  </div>
+
+<!-- Birthday and Anniversary ends-->
+<!-- Footer Section -->
+<div class="w3-row w3-padding-64">
+    <div class="w3-container">
+      <h1 class="w3-text-teal" id="footer">Footer</h1>    
+           
+            <form class="w3-panel w3-card-4">
+                <h2>Fill Footer Section</h2>
+                <p><input class="w3-input" type="text" id="ftbgcolor" placeholder="Background color example: #fa5e5f"></p>              
+                <p><input class="w3-input" type="text" id="ftTxtColr" placeholder="Text color for heading example: #fa5e5f"></p>
+                <p><input class="w3-input" type="email" value="" id="ftEmail" placeholder="Feedback sent to this Email"></p>
+                <p><input class="w3-input" type="text" value="" id="ftCncpt" placeholder="Concept by"></p>
+                <p><input class="w3-input" type="text" value="" id="ftExecn" placeholder="Execution by"></p>
+            </form>
+    </div>
+    
+  </div>
+<!-- Footer Section ends-->
+
+<!--Sumit button container -->
+  <div class="w3-row w3-padding-64">
+    <div class="w3-container">
+      <h1 class="w3-text-teal" id="body">Submit and Preview the Tiger Newsletter</h1>
+ 
+      <p><a id="bodyData" class="w3-third w3-btn w3-black">Submit Button</a>
+      <span class="w3third w3-btn" style="float:left"></span>
+      <a id="preview" class="w3-third w3-btn w3-black disabled" target="_blank" href="/preview">Preview Button</a></p>
+      <p><span id="message"class="w3-btn"></span></p>
+    </div>
+  </div>
+<!--Sumit button container Ends-->
+
+  
+
+  <footer id="myFooter">
+    <div class="w3-container w3-theme-l2 w3-padding-32">
+      <h4>Footer section is empty now!</h4>
+    </div>
+
+    <div class="w3-container w3-theme-l1">
+      <p>send app feedback to <i><a href="mailto:sponmily@sapient.com" target="_blank">shereej ponmily</a></i></p>
+    </div>
+  </footer>
+
+<!-- END MAIN -->
+</div>
+
+<script>
+
+var quill1 = new Quill('#editor-container', { 
+   placeholder: 'Compose the content...',
+   theme: 'snow'  // or 'bubble'
+});
+var quill2 = new Quill('#editor-container-bup', { 
+   placeholder: 'Compose the content...',
+   theme: 'snow'  // or 'bubble'
+});
+var quill3 = new Quill('#editor-container-opp', {
+   placeholder: 'Compose the content...',
+   theme: 'snow'  // or 'bubble'
+});
+var quill4 = new Quill('#editor-container-achv', { 
+   placeholder: 'Compose the content...',
+   theme: 'snow'  // or 'bubble'
+});
+var quill5 = new Quill('#editor-container-pland',{
+   placeholder: 'Compose the content...',
+   theme: 'snow'
+});
+var quill6 = new Quill('#editor-container-technews',{
+    placeholder: 'Compose the content...',
+    theme: 'snow'
+});
+var quill7 = new Quill('#editor-container-htips',{
+    placeholder: 'Compose the content...',
+    theme: 'snow'
+});
+
+
+// Get the Sidebar
+var mySidebar = document.getElementById("mySidebar");
+
+// Get the DIV with overlay effect
+var overlayBg = document.getElementById("myOverlay");
+
+// Toggle between showing and hiding the sidebar, and add overlay effect
+function w3_open() {
+    if (mySidebar.style.display === 'block') {
+        mySidebar.style.display = 'none';
+        overlayBg.style.display = "none";
+    } else {
+        mySidebar.style.display = 'block';
+        overlayBg.style.display = "block";
+    }
+}
+
+// Close the sidebar with the close button
+function w3_close() {
+    mySidebar.style.display = "none";
+    overlayBg.style.display = "none";
+}
+</script>
+
+</body>
+</html>
