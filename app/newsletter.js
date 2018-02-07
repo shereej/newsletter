@@ -781,7 +781,7 @@ teamimage = '<tr><td style="'+tsTBColr+'height: 10px;"></td></tr>'+
 var bday = '';  
 var fisrtTd = '<td style="padding:0 0 15px 0; text-align: center; width:20%">'+
               '<img alt="Birthday" src="images/common/Birtthday.png"></td>';   
-if(bdayfiles){
+if(bdayfiles.length>0){
     bday = fisrtTd;
     for (var key in bdayfiles) {
         var createTd = '';
@@ -798,7 +798,7 @@ var aniv = '';
 var fisrtTd = '<td style="padding:0 0 15px 0; width: 20%; text-align: center">'+
               '<img alt="Anniversary" src="images/common/Anniversary.png"></td>';
 
-if(anivfiles){
+if(anivfiles.length>0){
     aniv = fisrtTd;
     for (var key in anivfiles) {
         var createTd = '';
