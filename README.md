@@ -42,3 +42,4 @@ This project is licensed under the MIT License
 * Jimp for png opacity
 * multer for multi filed file upload
 * pretty for pretty html as output
+* Quill for rich text editor
