@@ -40,6 +40,6 @@ This project is licensed under the MIT License
 ## Acknowledgments
 
 * Jimp for png opacity
-* multer for multi filed file upload
+* multer for multi field file upload
 * pretty for pretty html as output
 * Quill for rich text editor
