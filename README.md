@@ -21,7 +21,7 @@ Install node js
 A step by step series of examples that tell you have to get a development env running
 
 ```
-run npm install
+npm install
 ```
 then run npm start
 open the localhost with port 8001 
