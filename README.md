@@ -27,6 +27,10 @@ then run npm start
 open the localhost with port 8001 
 http://localhost:8001/newsletter
 
+```
+npm start
+```
+
 Now it will be running and up for a demo
 
 ## Author
