@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
-<title>UCW-Tigers Newsletter</title>
-<!--Tigers newsletter - code by shereej ponmily-->
+<title>Nodejs Newsletter</title>
+<!--newsletter - code by shereej ponmily-->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -35,14 +35,19 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
 a.remove_field {
     color: #a90fc3;
 }
+.picker {
+  display: inline-block;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(3, 1, 1, 0.08);
+}
 </style>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
 <script src="https://cdn.quilljs.com/1.0.0/quill.js"></script>
+<script type="text/javascript" src="/js/acolorpicker.js"></script>
 <script>
   $(document).ready(function() {
-
+  	
     //Add dynamic fields
     var max_fields      = 20; //maximum input boxes allowed
     var wrapper         = $(".input_fields_wrap"); //Fields wrapper
@@ -61,14 +66,109 @@ a.remove_field {
     $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
         e.preventDefault(); $(this).parent('div').remove(); x--;
     });
-
-
-    
+	
+	AColorPicker.from('.picker1')
+		.on('change', (picker, color) => {
+		  $('#topBrdrColr').val(AColorPicker.parseColor(color, "hex"));
+	});
+	AColorPicker.from('.picker2')
+		.on('change', (picker, color) => {
+		  $('#bubgcolor').val(AColorPicker.parseColor(color, "hex"));
+	});
+	AColorPicker.from('.picker3')
+		.on('change', (picker, color) => {
+		  $('#buTxtcolor').val(AColorPicker.parseColor(color, "hex"));
+	});
+	AColorPicker.from('.picker4')
+		.on('change', (picker, color) => {
+		  $('#buTopBrdrColr').val(AColorPicker.parseColor(color, "hex"));
+	});
+	AColorPicker.from('.picker5')
+		.on('change', (picker, color) => {
+		  $('#bupbgcolor').val(AColorPicker.parseColor(color, "hex"));
+	});
+	AColorPicker.from('.picker6')
+		.on('change', (picker, color) => {
+		  $('#bupTxtcolor').val(AColorPicker.parseColor(color, "hex"));
+	});
+	AColorPicker.from('.picker7')
+		.on('change', (picker, color) => {
+		  $('#bupTopBrdrColr').val(AColorPicker.parseColor(color, "hex"));
+	});
+	AColorPicker.from('.picker8')
+		.on('change', (picker, color) => {
+		  $('#pbgcolor').val(AColorPicker.parseColor(color, "hex"));
+	});
+	AColorPicker.from('.picker9')
+		.on('change', (picker, color) => {
+		  $('#pTxtColr').val(AColorPicker.parseColor(color, "hex"));
+	});
+	AColorPicker.from('.picker10')
+		.on('change', (picker, color) => {
+		  $('#pTBColr').val(AColorPicker.parseColor(color, "hex"));
+	});
+	AColorPicker.from('.picker11')
+		.on('change', (picker, color) => {
+		  $('#psbgcolor').val(AColorPicker.parseColor(color, "hex"));
+	});
+	AColorPicker.from('.picker12')
+		.on('change', (picker, color) => {
+		  $('#psTxtColr').val(AColorPicker.parseColor(color, "hex"));
+	});
+	AColorPicker.from('.picker13')
+		.on('change', (picker, color) => {
+		  $('#psTBColr').val(AColorPicker.parseColor(color, "hex"));
+	});
+	AColorPicker.from('.picker14')
+		.on('change', (picker, color) => {
+		  $('#tnbgcolor').val(AColorPicker.parseColor(color, "hex"));
+	});
+	AColorPicker.from('.picker15')
+		.on('change', (picker, color) => {
+		  $('#tnTxtColr').val(AColorPicker.parseColor(color, "hex"));
+	});
+	AColorPicker.from('.picker16')
+		.on('change', (picker, color) => {
+		  $('#tnTBColr').val(AColorPicker.parseColor(color, "hex"));
+	});
+	AColorPicker.from('.picker17')
+		.on('change', (picker, color) => {
+		  $('#htbgcolor').val(AColorPicker.parseColor(color, "hex"));
+	});
+	AColorPicker.from('.picker18')
+		.on('change', (picker, color) => {
+		  $('#htTxtColr').val(AColorPicker.parseColor(color, "hex"));
+	});
+	AColorPicker.from('.picker19')
+		.on('change', (picker, color) => {
+		  $('#htTBColr').val(AColorPicker.parseColor(color, "hex"));
+	});
+	AColorPicker.from('.picker20')
+		.on('change', (picker, color) => {
+		  $('#tsTBColr').val(AColorPicker.parseColor(color, "hex"));
+	});
+	AColorPicker.from('.picker21')
+		.on('change', (picker, color) => {
+		  $('#bdTBColr').val(AColorPicker.parseColor(color, "hex"));
+	});
+	AColorPicker.from('.picker22')
+		.on('change', (picker, color) => {
+		  $('#bdbgColr').val(AColorPicker.parseColor(color, "hex"));
+	});
+	AColorPicker.from('.picker23')
+		.on('change', (picker, color) => {
+		  $('#ftbgcolor').val(AColorPicker.parseColor(color, "hex"));
+	});
+	AColorPicker.from('.picker24')
+		.on('change', (picker, color) => {
+		  $('#ftTxtColr').val(AColorPicker.parseColor(color, "hex"));
+	});
+  
     $('#uploadForm').submit(function() {
         $("#status").empty().text("File is uploading...");        
         $(this).ajaxSubmit({
             error: function(xhr) {
-                status('Error: ' + xhr.status);
+                console.log('Error: ' + xhr.status);
             },
             success: function(response) {
                 console.log(response)
@@ -82,7 +182,7 @@ a.remove_field {
         $("#statusbu").empty().text("File is uploading...");        
         $(this).ajaxSubmit({
             error: function(xhr) {
-                status('Error: ' + xhr.status);
+                console.log('Error: ' + xhr.status);
             },
             success: function(response) {
                 console.log(response)
@@ -96,7 +196,7 @@ a.remove_field {
         $("#statusbup").empty().text("File is uploading...");        
         $(this).ajaxSubmit({
             error: function(xhr) {
-                status('Error: ' + xhr.status);
+                console.log('Error: ' + xhr.status);
             },
             success: function(response) {
                 console.log(response)
@@ -110,7 +210,7 @@ a.remove_field {
         $("#statusp").empty().text("File is uploading...");        
         $(this).ajaxSubmit({
             error: function(xhr) {
-                status('Error: ' + xhr.status);
+                console.log('Error: ' + xhr.status);
             },
             success: function(response) {
                 console.log(response)
@@ -125,7 +225,7 @@ a.remove_field {
         $("#statusps").empty().text("File is uploading...");        
         $(this).ajaxSubmit({
             error: function(xhr) {
-                status('Error: ' + xhr.status);
+                console.log('Error: ' + xhr.status);
             },
             success: function(response) {
                 console.log(response)
@@ -140,7 +240,7 @@ a.remove_field {
         $("#statustn").empty().text("File is uploading...");        
         $(this).ajaxSubmit({
             error: function(xhr) {
-                status('Error: ' + xhr.status);
+                console.log('Error: ' + xhr.status);
             },
             success: function(response) {
                 console.log(response)
@@ -155,7 +255,7 @@ a.remove_field {
         $("#statusht").empty().text("File is uploading...");        
         $(this).ajaxSubmit({
             error: function(xhr) {
-                status('Error: ' + xhr.status);
+                console.log('Error: ' + xhr.status);
             },
             success: function(response) {
                 console.log(response)
@@ -170,7 +270,7 @@ a.remove_field {
         $("#statusts").empty().text("File is uploading...");        
         $(this).ajaxSubmit({
             error: function(xhr) {
-                status('Error: ' + xhr.status);
+                console.log('Error: ' + xhr.status);
             },
             success: function(response) {
                 console.log(response)
@@ -186,7 +286,7 @@ $('#uploadBdayimage').submit(function() {
         $("#statusbd").empty().text("File is uploading...");
         $(this).ajaxSubmit({
             error: function(xhr) {
-          status('Error: ' + xhr.status);
+                console.log('Error: ' + xhr.status);
             },
             success: function(response) {
                 console.log(response)
@@ -203,7 +303,7 @@ $('#uploadAnivimage').submit(function() {
         $("#statusan").empty().text("File is uploading...");
         $(this).ajaxSubmit({
             error: function(xhr) {
-                status('Error: ' + xhr.status);
+                console.log('Error: ' + xhr.status);
             },
             success: function(response) {
                 console.log(response)
@@ -400,13 +500,8 @@ $('#uploadAnivimage').submit(function() {
 <div class="w3-top">
   <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
     <a class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme-l1" href="javascript:void(0)" onclick="w3_open()"><i class="fa fa-bars"></i></a>
-    <a href="#" class="w3-bar-item w3-button w3-theme-l1">Logo</a>
-    <!--<a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">About</a>
-    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Values</a>
-    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">News</a>
-    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Contact</a>
-    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-white">Clients</a>
-    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-white">Partners</a>-->
+    <a href="#" class="w3-bar-item w3-button w3-theme-l1"><img src="images/common/logotigers.png" width="22"/> S P </a>
+    
   </div>
 </div>
 
@@ -431,7 +526,12 @@ $('#uploadAnivimage').submit(function() {
 </nav>
 
 <!-- Overlay effect when opening sidebar on small screens -->
-<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+<div class="w3-overlay w3-hide-large" 
+    onclick="w3_close()" 
+    style="cursor:pointer" 
+    title="close side menu" 
+    id="myOverlay">
+</div>
 
 <!-- Main content: shift it to the right by 250 pixels when the sidebar is visible -->
 <div class="w3-main" style="margin-left:250px">
@@ -461,7 +561,14 @@ $('#uploadAnivimage').submit(function() {
             action="/uploadimage"
             method="post">
         <h2>Upload the banner image</h2>
-        <p><input class="w3-input" type="text" id="topBrdrColr" placeholder="Border top color example : #eaeaea"></p>     
+        <p><input class="w3-input" type="text" id="topBrdrColr" placeholder="Border top color, choose using color picker"></p>  
+		<div class="picker1" 
+			 acp-color="#EFE9E7" 
+			 acp-show-rgb="no"
+			 acp-show-hsl="no"
+			 acp-show-hex="yes"
+			 acp-show-alpha>
+		</div>
         <p><input class="w3-third w3-input" type="file" name="headerfile" />
         <input class="w3-third w3-input w3-btn w3-black" type="submit" value="Upload Image" name="submit"></p>
         <p><span id = "status" class="w3-btn"></span></p>
@@ -481,7 +588,14 @@ $('#uploadAnivimage').submit(function() {
                   method="post">
               <h2>Upload the background image</h2>
               <p>Update background color if the image is not authored</p>
-              <p><input class="w3-input" type="text" id="bubgcolor" placeholder="Background color example: #fa5e5f"></p>
+              <p><input class="w3-input" type="text" id="bubgcolor" placeholder="Background color, choose using color picker"></p>
+			  <div class="picker2" 
+				 acp-color="#EFE9E7" 
+				 acp-show-rgb="no"
+				 acp-show-hsl="no"
+				 acp-show-hex="yes"
+				 acp-show-alpha>
+			  </div>
               <p>Upload PNG images for auto opacity!</p>
               <p><input class="w3-third w3-input" type="file" name="bubgfile" />
               <input class="w3-third w3-input w3-btn w3-black" type="submit" value="Upload Image" name="submit"></p>
@@ -491,7 +605,21 @@ $('#uploadAnivimage').submit(function() {
             <form class="w3-panel w3-card-4">
                 <h2>Fill Business Article</h2>  
                 <p><input class="w3-input" type="text" id="buTxtcolor" placeholder="Text color for heading example: #fa5e5f"></p>
+				<div class="picker3" 
+				 acp-color="#EFE9E7" 
+				 acp-show-rgb="no"
+				 acp-show-hsl="no"
+				 acp-show-hex="yes"
+				 acp-show-alpha>
+			  </div>
                 <p><input class="w3-input" type="text" value="" id="buTopBrdrColr" placeholder="Border top color example : #eaeaea"></p>
+				<div class="picker4" 
+				 acp-color="#EFE9E7" 
+				 acp-show-rgb="no"
+				 acp-show-hsl="no"
+				 acp-show-hex="yes"
+				 acp-show-alpha>
+			  </div>
                 <p><input class="w3-input" type="text" value="" id="buTitle" placeholder="Title"></p>
                 <p><input class="w3-input" type="text" id="buMonth" placeholder="Month Year"></p>
                 <p><input class="w3-input" type="text" id="buAuthor" placeholder="Author Name"></p>
@@ -518,6 +646,13 @@ $('#uploadAnivimage').submit(function() {
               <h2>Upload the background image</h2>
               <p>Update background color if the image is not authored</p>
               <p><input class="w3-input" type="text" id="bupbgcolor" placeholder="Background color example: #fa5e5f"></p>
+			  <div class="picker5" 
+				 acp-color="#EFE9E7" 
+				 acp-show-rgb="no"
+				 acp-show-hsl="no"
+				 acp-show-hex="yes"
+				 acp-show-alpha>
+			  </div>
               <p>Upload PNG images for auto opacity!</p>
               <p><input class="w3-third w3-input" type="file" name="bupbgfile" />
               <input class="w3-third w3-input w3-btn w3-black" type="submit" value="Upload Image" name="submit"></p>
@@ -527,7 +662,21 @@ $('#uploadAnivimage').submit(function() {
             <form class="w3-panel w3-card-4">
                 <h2>Fill Business Updates</h2>  
                 <p><input class="w3-input" type="text" id="bupTxtcolor" placeholder="Text color for heading example: #fa5e5f"></p>
+				<div class="picker6" 
+				 acp-color="#EFE9E7" 
+				 acp-show-rgb="no"
+				 acp-show-hsl="no"
+				 acp-show-hex="yes"
+				 acp-show-alpha>
+			  </div>
                 <p><input class="w3-input" type="text" value="" id="bupTopBrdrColr" placeholder="Border top color example : #eaeaea"></p>
+				<div class="picker7" 
+				 acp-color="#EFE9E7" 
+				 acp-show-rgb="no"
+				 acp-show-hsl="no"
+				 acp-show-hex="yes"
+				 acp-show-alpha>
+			  </div>
                 <p><input class="w3-input" type="text" value="" id="bupTitle" placeholder="Title"></p>                
                 <p><div id="editor-container-bup"></div></p>
                 <br/>
@@ -561,6 +710,13 @@ $('#uploadAnivimage').submit(function() {
               <h2>Upload the background image</h2> 
               <p>Update background color if the image is not authored</p>
               <p><input class="w3-input" type="text" id="pbgcolor" placeholder="Background color example: #fa5e5f"></p>
+			  <div class="picker8" 
+				 acp-color="#EFE9E7" 
+				 acp-show-rgb="no"
+				 acp-show-hsl="no"
+				 acp-show-hex="yes"
+				 acp-show-alpha>
+			  </div>
               <p>Upload PNG images for auto opacity!</p>
               <p><input class="w3-third w3-input" type="file" name="pbgfile" />
               <input class="w3-third w3-input w3-btn w3-black" type="submit" value="Upload Image" name="submit"></p>
@@ -570,7 +726,21 @@ $('#uploadAnivimage').submit(function() {
             <form class="w3-panel w3-card-4">
                 <h2>Fill Planned Project activities</h2>  
                 <p><input class="w3-input" type="text" id="pTxtColr" placeholder="Text color for heading example: #fa5e5f"></p>
+				<div class="picker9" 
+				 acp-color="#EFE9E7" 
+				 acp-show-rgb="no"
+				 acp-show-hsl="no"
+				 acp-show-hex="yes"
+				 acp-show-alpha>
+			  </div>
                 <p><input class="w3-input" type="text" value="" id="pTBColr" placeholder="Border top color example : #eaeaea"></p>
+				<div class="picker10" 
+				 acp-color="#EFE9E7" 
+				 acp-show-rgb="no"
+				 acp-show-hsl="no"
+				 acp-show-hex="yes"
+				 acp-show-alpha>
+			  </div>
                 <p><input class="w3-input" type="text" value="" id="pTitle" placeholder="Title"></p>
                 <p><div id="editor-container-pland"></div></p>
                 
@@ -595,6 +765,13 @@ $('#uploadAnivimage').submit(function() {
               <h2>Upload the background image</h2> 
               <p>Update background color if the image is not authored</p>
               <p><input class="w3-input" type="text" id="psbgcolor" placeholder="Background color example: #fa5e5f"></p>
+			  <div class="picker11" 
+				 acp-color="#EFE9E7" 
+				 acp-show-rgb="no"
+				 acp-show-hsl="no"
+				 acp-show-hex="yes"
+				 acp-show-alpha>
+			  </div>
               <p>Upload PNG images for auto opacity!</p>
               <p><input class="w3-third w3-input" type="file" name="psbgfile" />
               <input class="w3-third w3-input w3-btn w3-black" type="submit" value="Upload Image" name="submit"></p>
@@ -604,7 +781,21 @@ $('#uploadAnivimage').submit(function() {
             <form class="w3-panel w3-card-4">
                 <h2>Fill Project Statistics</h2>
                 <p><input class="w3-input" type="text" id="psTxtColr" placeholder="Text color for heading example: #fa5e5f"></p>
+				<div class="picker12" 
+				 acp-color="#EFE9E7" 
+				 acp-show-rgb="no"
+				 acp-show-hsl="no"
+				 acp-show-hex="yes"
+				 acp-show-alpha>
+			  </div>
                 <p><input class="w3-input" type="text" value="" id="psTBColr" placeholder="Border top color example : #eaeaea"></p>
+				<div class="picker13" 
+				 acp-color="#EFE9E7" 
+				 acp-show-rgb="no"
+				 acp-show-hsl="no"
+				 acp-show-hex="yes"
+				 acp-show-alpha>
+			  </div>
                 <p><input class="w3-input" type="text" value="" id="psTitle" placeholder="Title"></p>
                 <p><input class="w3-input" type="text" value="" id="psDfa" placeholder="DFA"></p>
                 <p><input class="w3-input" type="text" value="" id="psAttrition" placeholder="Attrition rate in %"></p>
@@ -633,6 +824,13 @@ $('#uploadAnivimage').submit(function() {
               <h2>Upload the background image</h2> 
               <p>Update background color if the image is not authored</p>
               <p><input class="w3-input" type="text" id="tnbgcolor" placeholder="Background color example: #fa5e5f"></p>
+			  <div class="picker14" 
+				 acp-color="#EFE9E7" 
+				 acp-show-rgb="no"
+				 acp-show-hsl="no"
+				 acp-show-hex="yes"
+				 acp-show-alpha>
+			  </div>
               <p>Upload PNG images for auto opacity!</p>
               <p><input class="w3-third w3-input" type="file" name="tnbgfile" />
               <input class="w3-third w3-input w3-btn w3-black" type="submit" value="Upload Image" name="submit"></p>
@@ -642,7 +840,21 @@ $('#uploadAnivimage').submit(function() {
             <form class="w3-panel w3-card-4">
                 <h2>Fill Technical Newsletter</h2>  
                 <p><input class="w3-input" type="text" id="tnTxtColr" placeholder="Text color for heading example: #fa5e5f"></p>
+				<div class="picker15" 
+				 acp-color="#EFE9E7" 
+				 acp-show-rgb="no"
+				 acp-show-hsl="no"
+				 acp-show-hex="yes"
+				 acp-show-alpha>
+			  </div>
                 <p><input class="w3-input" type="text" value="" id="tnTBColr" placeholder="Border top color example : #eaeaea"></p>
+				<div class="picker16" 
+				 acp-color="#EFE9E7" 
+				 acp-show-rgb="no"
+				 acp-show-hsl="no"
+				 acp-show-hex="yes"
+				 acp-show-alpha>
+			  </div>
                 <p><input class="w3-input" type="text" value="" id="tnTitle" placeholder="Title"></p>
                 <p><input class="w3-input" type="text" value="" id="tnAuthor" placeholder="Author"></p>
                 <p><div id="editor-container-technews"></div></p>
@@ -666,6 +878,13 @@ $('#uploadAnivimage').submit(function() {
               <h2>Upload the background image</h2>
               <p>Update background color if the image is not authored</p>
               <p><input class="w3-input" type="text" id="htbgcolor" placeholder="Background color example: #fa5e5f"></p>
+			  <div class="picker17" 
+				 acp-color="#EFE9E7" 
+				 acp-show-rgb="no"
+				 acp-show-hsl="no"
+				 acp-show-hex="yes"
+				 acp-show-alpha>
+			  </div>
               <p>Upload PNG images for auto opacity!</p>
               <p><input class="w3-third w3-input" type="file" name="htbgfile" />
               <input class="w3-third w3-input w3-btn w3-black" type="submit" value="Upload Image" name="submit"></p>
@@ -674,7 +893,21 @@ $('#uploadAnivimage').submit(function() {
             <form class="w3-panel w3-card-4">
                 <h2>Fill Health Tips</h2>  
                 <p><input class="w3-input" type="text" id="htTxtColr" placeholder="Text color for heading example: #fa5e5f"></p>
+				<div class="picker18" 
+				 acp-color="#EFE9E7" 
+				 acp-show-rgb="no"
+				 acp-show-hsl="no"
+				 acp-show-hex="yes"
+				 acp-show-alpha>
+			  </div>
                 <p><input class="w3-input" type="text" value="" id="htTBColr" placeholder="Border top color example : #eaeaea"></p>
+				<div class="picker19" 
+				 acp-color="#EFE9E7" 
+				 acp-show-rgb="no"
+				 acp-show-hsl="no"
+				 acp-show-hex="yes"
+				 acp-show-alpha>
+			  </div>
                 <p><input class="w3-input" type="text" value="" id="htTitle" placeholder="Title"></p>
                 <p><div id="editor-container-htips"></div></p>                
             </form>
@@ -695,6 +928,13 @@ $('#uploadAnivimage').submit(function() {
                   method="post">
               <h2>Upload the Team image</h2>
               <p><input class="w3-input" type="text" value="" id="tsTBColr" placeholder="Border top color example : #eaeaea"></p>
+			  <div class="picker20" 
+				 acp-color="#EFE9E7" 
+				 acp-show-rgb="no"
+				 acp-show-hsl="no"
+				 acp-show-hex="yes"
+				 acp-show-alpha>
+			  </div>
               <p><input class="w3-third w3-input" type="file" name="tsbgfile" />
               <input class="w3-third w3-input w3-btn w3-black" type="submit" value="Upload Image" name="submit"></p>
               <p><span id = "statusts" class="w3-btn"></span></p>
@@ -711,7 +951,21 @@ $('#uploadAnivimage').submit(function() {
             <form class="w3-panel w3-card-4">
                 <p><input class="w3-input" type="text" id="bdTxtColr" placeholder="Text color example: #fa5e5f"></p>
                 <p><input class="w3-input" type="text" value="" id="bdTBColr" placeholder="Border top color example : #eaeaea"></p>
+				<div class="picker21" 
+				 acp-color="#EFE9E7" 
+				 acp-show-rgb="no"
+				 acp-show-hsl="no"
+				 acp-show-hex="yes"
+				 acp-show-alpha>
+			  </div>
                 <p><input class="w3-input" type="text" value="" id="bdbgColr" placeholder="Background color example : #eaeaea"></p>
+				<div class="picker22" 
+				 acp-color="#EFE9E7" 
+				 acp-show-rgb="no"
+				 acp-show-hsl="no"
+				 acp-show-hex="yes"
+				 acp-show-alpha>
+			  </div>
                      
             </form>     
             
@@ -781,8 +1035,22 @@ $('#uploadAnivimage').submit(function() {
            
             <form class="w3-panel w3-card-4">
                 <h2>Fill Footer Section</h2>
-                <p><input class="w3-input" type="text" id="ftbgcolor" placeholder="Background color example: #fa5e5f"></p>              
+                <p><input class="w3-input" type="text" id="ftbgcolor" placeholder="Background color example: #fa5e5f"></p>    
+				<div class="picker23" 
+				 acp-color="#EFE9E7" 
+				 acp-show-rgb="no"
+				 acp-show-hsl="no"
+				 acp-show-hex="yes"
+				 acp-show-alpha>
+			  </div>				
                 <p><input class="w3-input" type="text" id="ftTxtColr" placeholder="Text color for heading example: #fa5e5f"></p>
+				<div class="picker24" 
+				 acp-color="#EFE9E7" 
+				 acp-show-rgb="no"
+				 acp-show-hsl="no"
+				 acp-show-hex="yes"
+				 acp-show-alpha>
+			  </div>
                 <p><input class="w3-input" type="email" value="" id="ftEmail" placeholder="Feedback sent to this Email"></p>
                 <p><input class="w3-input" type="text" value="" id="ftCncpt" placeholder="Concept by"></p>
                 <p><input class="w3-input" type="text" value="" id="ftExecn" placeholder="Execution by"></p>
@@ -795,11 +1063,11 @@ $('#uploadAnivimage').submit(function() {
 <!--Sumit button container -->
   <div class="w3-row w3-padding-64">
     <div class="w3-container">
-      <h1 class="w3-text-teal" id="body">Submit and Preview the Tiger Newsletter</h1>
+      <h1 class="w3-text-teal" id="body">Submit and preview the newsletter &nbsp;&nbsp;<small><i>(after submit, preview button will be enabled)</i></small> </h1>
  
-      <p><a id="bodyData" class="w3-third w3-btn w3-black">Submit Button</a>
+      <p><a id="bodyData" class="w3-third w3-btn w3-black">Submit</a>
       <span class="w3third w3-btn" style="float:left"></span>
-      <a id="preview" class="w3-third w3-btn w3-black disabled" target="_blank" href="/preview">Preview Button</a></p>
+      <a id="preview" class="w3-third w3-btn w3-black disabled" target="_blank" href="/preview">Preview</a></p>
       <p><span id="message"class="w3-btn"></span></p>
     </div>
   </div>
@@ -809,11 +1077,11 @@ $('#uploadAnivimage').submit(function() {
 
   <footer id="myFooter">
     <div class="w3-container w3-theme-l2 w3-padding-32">
-      <h4>Footer section is empty now!</h4>
+      <h4>Footer section is empty now! - think some thing creative for your audience</h4>
     </div>
 
     <div class="w3-container w3-theme-l1">
-      <p>send app feedback to <i><a href="mailto:sponmily@sapient.com" target="_blank">shereej ponmily</a></i></p>
+      <p>send app feedback to <i><a href="mailto:shereej.ponmily@publicissapient.com">shereej ponmily</a></i></p>
     </div>
   </footer>
 
@@ -822,6 +1090,7 @@ $('#uploadAnivimage').submit(function() {
 
 <script>
 
+  
 var quill1 = new Quill('#editor-container', { 
    placeholder: 'Compose the content...',
    theme: 'snow'  // or 'bubble'
