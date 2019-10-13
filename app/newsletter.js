@@ -20,6 +20,7 @@ var storage =   multer.diskStorage({
     callback(null, file.originalname);
   }
 });
+	
 var upload = multer({ storage : storage }).array('userPhoto',10);
 var upload2 = multer({ storage : storage }).array('userPhoto2',10);
 
@@ -28,6 +29,8 @@ var bdayfiles;
 var anivinfo;
 var anivfiles;
 
+
+	
 app.post('/api/anvi/photo',function(req,res){
     upload2(req,res,function(err) {
         if(err) {
@@ -111,7 +114,11 @@ var docTitle = '',
     ftCncpt = '',
     ftExecn = '';
 
-app.use(express.static('dist'));
+	
+	app.use(express.static('source'));
+	app.use(express.static('dist'));
+
+//app.use('/jscript',express.static('source'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(function(req, res, next) {
@@ -428,7 +435,7 @@ let opacityVal = 0.1;
     });
     if(tnbgfp.indexOf('.png')!=-1){  
     Jimp.read(tnbgfp).then(function (img) {
-            return img.fade(opacityVal)
+            return img.opacity(opacityVal)
                 .write(tnbgfp); // save
     }).catch(function (err) {
         console.error(err);
@@ -458,7 +465,7 @@ let opacityVal = 0.1;
    });
    if(bubgfp.indexOf('.png')!=-1){ 
    Jimp.read(bubgfp).then(function (img) {
-            return img.fade(opacityVal)
+            return img.opacity(opacityVal)
                 .write(bubgfp); // save
     }).catch(function (err) {
         console.error(err);
@@ -477,7 +484,7 @@ let opacityVal = 0.1;
    });
    if(bupbgfp.indexOf('.png')!=-1){ 
    Jimp.read(bupbgfp).then(function (img) {
-            return img.fade(opacityVal)
+            return img.opacity(opacityVal)
                 .write(bupbgfp); // save
     }).catch(function (err) {
         console.error(err);
@@ -496,7 +503,7 @@ let opacityVal = 0.1;
    });
    if(pbgfp.indexOf('.png')!=-1){ 
    Jimp.read(pbgfp).then(function (img) {
-            return img.fade(opacityVal)
+            return img.opacity(opacityVal)
                 .write(pbgfp); // save
     }).catch(function (err) {
         console.error(err);
@@ -516,7 +523,7 @@ let opacityVal = 0.1;
    });
    if(psbgfp.indexOf('.png')!=-1){ 
    Jimp.read(psbgfp).then(function (img) {
-            return img.fade(opacityVal)
+            return img.opacity(opacityVal)
                 .write(psbgfp); // save
     }).catch(function (err) {
         console.error(err);
@@ -530,18 +537,18 @@ let opacityVal = 0.1;
 function buildHtml() {
   console.log('build html');  
   var header = '';
-  var body = '', businessArticle = '', businessUpdates = '', 
+  var body = '', headerBg = '', businessArticle = '', businessUpdates = '', 
   planned = '', projectStatistics = '', technicalnews = '',
-  healthtips = '', bDayandAnniversary ='', footersection='';
+  healthtips = '', bDayandAnniversary ='', teamimage='', footersection='';
 
-  var bannerImg = "images/"+headerImage;
-  var bubgImg = "images/"+bubgImage;
-  var bupbgImg = "images/"+bupbgImage;
-  var pbgImg = "images/"+pbgImage;
-  var psbgImg = "images/"+psbgImage;
-  var tnbgImg = "images/"+tnbgImage;
-  var htbgImg = "images/"+htbgImage;
-  var tsImg = "images/"+tsbgImage;
+  var bannerImg = ( headerImage!='' ) ? "images/"+headerImage : '';
+  var bubgImg = ( bubgImage!='' ) ? "images/"+bubgImage : '';
+  var bupbgImg = ( bupbgImage!='' ) ? "images/"+bupbgImage : '';
+  var pbgImg = ( pbgImage!='' ) ? "images/"+pbgImage : '';
+  var psbgImg = ( psbgImage!='' ) ? "images/"+psbgImage : '';
+  var tnbgImg = ( tnbgImage!='' ) ? "images/"+tnbgImage : '';
+  var htbgImg = ( htbgImage!='' ) ? "images/"+htbgImage : '';
+  var tsImg = ( tsbgImage!='' ) ? "images/"+tsbgImage : '';
 
   //tsbgImage
    
@@ -558,6 +565,15 @@ function buildHtml() {
         '<meta charset="UTF-8">'+
         '<meta name="viewport" content="width=device-width, initial-scale=1.0">';  
 
+//Header banner section
+if(bannerImg){
+    headerBg = '<tr >'+
+                    '<td id="header">'+                
+                        '<img width="width: 900px" alt="logo" src="'+bannerImg+'">'+
+                    '</td>'+
+                '</tr>';
+}
+if(b_title || b_data!="<p><br></p>"){
  //business article data section
  businessArticle = '<tr><td style="'+buTopColr+'height: 10px;"></td></tr>'+
 			'<tbody style="background: url('+bubgImg+');background-repeat: repeat;'+bubgcolor+'">'+
@@ -584,68 +600,82 @@ function buildHtml() {
                         '<p style="'+butxtColor+'display:inline; font-weight: bold;">Author: </p>'+b_author+'</div>'+
 				'</td>'+
             '</tr></tbody>';
+}
+if(bup_Title || bup_data!="<p><br></p>"){	
+	//business updates template
+	businessUpdates = '<tr><td style="'+bup_topBrdColr+'height: 10px;"></td></tr>'+
+					   '<tbody style="background: url('+bupbgImg+');background-repeat: repeat;'+bup_bgcolor+'">'+
+				'<tr id="bussiness">'+
+					'<td style="padding:15px 10px 0 10px;">'+
+						'<table style="border: 0; border-collapse: collapse;'+bup_Txtcolor+';width: 100%">'+
+							'<tr>'+
+								'<td rowspan="2" style="width:3%">'+
+									'<img style="width:90px; height:90px;" alt="Business" src="images/common/Business update.png">'+
+								'</td>'+
+								'<td style="padding-left: 15px;vertical-align: middle;"><span class="first" style="font-family: Impact;font-size: 32px;">'+bup_Title+'</span>'+
+								'</td>'+
+							'</tr>'+
+						'</table>'+
+					'</td>'+
+				'</tr>'+
+				'<tr id="biz-text">'+
+					'<td style="text-align: left;padding:5px 10px 15px 10px;color: #000; font-size: 12px">'+
+						//some text
+						bup_data+
+					'</td>'+
+				'</tr>';
+	}
+	if(oppTitle1 || oppTitle2 || oppTitle3){
+		var oppertunity = '<tr id="oppertunity" >'+
+								'<td>'+
+									'<table style="border: 0; border-collapse: collapse;color: #000;">'+
+										'<tr style="vertical-align:top">'+
+											'<td class="header" style="padding-left:10px;">'+
+												'<table style="border: 0; border-collapse: collapse;">'+
+													'<tr>'+
+														'<td colspan="2" style="font-family: Impact; font-size: 32px; '+bup_Txtcolor+'">'+oppTitle1+'</td>'+
+													'</tr>'+
+													'<tr>'+
+														'<td><img alt="oppertunity" src="images/common/Person_Climbing_A_Ladder-512.png" style="height: 80px;position: relative; top: 6px;"></td>'+
+														'<td style="font-family: Impact; font-size:32px; text-align: right; line-height: 53px;'+bup_Txtcolor+'">'+oppTitle2+' <br> '+oppTitle3+'</td>'+
+													'</tr>'+
+												'</table>'+
+											'</td>'+
+											'<td style="padding: 0 10px 0 10px; font-family: Century Gothic;font-size: 12px;">'+
+												//some text
+												opp_data+
+											'</td>'+
+										'</tr>'+
+									'</table>'+
+								'</td>'+
+							'</tr>';
+				businessUpdates = businessUpdates + oppertunity;			
+	}
+	if(achv_Title || achv_data!="<p><br></p>"){
+		
 
-//business updates template
-businessUpdates = '<tr><td style="'+bup_topBrdColr+'height: 10px;"></td></tr>'+
-                   '<tbody style="background: url('+bupbgImg+');background-repeat: repeat;'+bup_bgcolor+'">'+
-            '<tr id="bussiness">'+
-                '<td style="padding:15px 10px 0 10px;">'+
-                    '<table style="border: 0; border-collapse: collapse;'+bup_Txtcolor+';width: 100%">'+
-                        '<tr>'+
-                            '<td rowspan="2" style="width:3%">'+
-                                '<img style="width:90px; height:90px;" alt="Business" src="images/common/Business update.png">'+
-                            '</td>'+
-                            '<td style="padding-left: 15px;vertical-align: middle;"><span class="first" style="font-family: Impact;font-size: 32px;">'+bup_Title+'</span>'+
-                            '</td>'+
-                        '</tr>'+
-                    '</table>'+
-                '</td>'+
-            '</tr>'+
-            '<tr id="biz-text">'+
-                '<td style="text-align: left;padding:5px 10px 15px 10px;color: #000; font-size: 12px">'+
-                    //some text
-                    bup_data+
-                '</td>'+
-            '</tr>'+
-            '<tr id="oppertunity" >'+
-                '<td>'+
-                    '<table style="border: 0; border-collapse: collapse;color: #000;">'+
-                        '<tr style="vertical-align:top">'+
-                            '<td class="header" style="padding-left:10px;">'+
-                                '<table style="border: 0; border-collapse: collapse;">'+
-                                    '<tr>'+
-                                        '<td colspan="2" style="font-family: Impact; font-size: 32px; '+bup_Txtcolor+'">'+oppTitle1+'</td>'+
-                                    '</tr>'+
-                                    '<tr>'+
-                                        '<td><img alt="oppertunity" src="images/common/Person_Climbing_A_Ladder-512.png" style="height: 80px;position: relative; top: 6px;"></td>'+
-                                        '<td style="font-family: Impact; font-size:32px; text-align: right; line-height: 53px;'+bup_Txtcolor+'">'+oppTitle2+' <br> '+oppTitle3+'</td>'+
-                                    '</tr>'+
-                                '</table>'+
-                            '</td>'+
-                            '<td style="padding: 0 10px 0 10px; font-family: Century Gothic;font-size: 12px;">'+
-                                //some text
-                                opp_data+
-                            '</td>'+
-                        '</tr>'+
-                    '</table>'+
-                '</td>'+
-            '</tr>'+
-            '<tr id="archieve">'+
-                '<td style="padding:15px;">'+
-                    '<table style="border: 0; border-collapse: collapse;color: #000;font-family: Century Gothic;">'+
-                        '<tr>'+
-                            '<td style="padding-left: 45px;"><img alt="archive" src="images/common/Achieved.png" style="margin-right: 15px;"></td>'+
-                            '<td style="padding-left:15px; vertical-align: top;font-size: 12px">'+
-                                '<div style="font-size: 32px; '+bup_Txtcolor+' margin-bottom: 10px;font-family: Impact;">'+achv_Title+'</div>'+
-                                //some text
-                                achv_data+
-                            '</td>'+
-                        '</tr>'+
-                    '</table>'+
-                '</td>'+
-            '</tr>'+
-			'</tbody>';
+				var archieve = '<tr id="archieve">'+
+								'<td style="padding:15px;">'+
+									'<table style="border: 0; border-collapse: collapse;color: #000;font-family: Century Gothic;">'+
+										'<tr>'+
+											'<td style="padding-left: 45px;"><img alt="archive" src="images/common/Achieved.png" style="margin-right: 15px;"></td>'+
+											'<td style="padding-left:15px; vertical-align: top;font-size: 12px">'+
+												'<div style="font-size: 32px; '+bup_Txtcolor+' margin-bottom: 10px;font-family: Impact;">'+achv_Title+'</div>'+
+												//some text
+												achv_data+
+											'</td>'+
+										'</tr>'+
+									'</table>'+
+								'</td>'+
+							'</tr>';
+				businessUpdates = businessUpdates + archieve;
+	}
+if(bup_Title || bup_data){	
+	businessUpdates = businessUpdates + '</tbody>';
+}
 
+if(pTitle || plan_data!="<p><br></p>"){
+	
 
 //Planned Activities template
  planned = '<tr><td style="'+pTBColr+'height: 10px;"></td></tr>'+
@@ -665,7 +695,7 @@ businessUpdates = '<tr><td style="'+bup_topBrdColr+'height: 10px;"></td></tr>'+
                     '</table>'+
                 '</td>'+
             '</tr>';
-
+}
 //Project statistics template
 var psMultiField = '';     
 if(psmulti){
@@ -681,6 +711,9 @@ if(psmulti){
         psMultiField = psMultiField + createTr;                                    
     }
 }
+if(psMultiField || psAttrition || psDfa){
+	
+
 projectStatistics = '<tr><td style="'+psTBColr+'height: 10px;"></td></tr>'+
     '<tbody style="background: url('+psbgImg+');background-repeat: repeat;'+psbgcolor+'">'+
 			'<tr id="statistics">'+
@@ -733,6 +766,9 @@ projectStatistics = '<tr><td style="'+psTBColr+'height: 10px;"></td></tr>'+
                 '</td>'+
             '</tr>'+
 			'</tbody>';
+}
+if(tnTitle || tn_data!="<p><br></p>" || tnAuthor){
+	
 
 //Technical Newsletter
 technicalnews = '<tr><td style="'+tnTBColr+'height: 10px;"></td></tr>'+
@@ -746,7 +782,9 @@ technicalnews = '<tr><td style="'+tnTBColr+'height: 10px;"></td></tr>'+
                         '</td>'+
                     '</tr>'+
                 '</tbody>';
-
+}
+if(htTitle || ht_data!="<p><br></p>"){
+	
 //Health Tips template
 healthtips = '<tr><td style="'+htTBColr+'height: 10px;"></td></tr>'+
             '<tbody style="background: url('+htbgImg+');background-repeat: repeat;'+htbgcolor+'">'+
@@ -767,21 +805,26 @@ healthtips = '<tr><td style="'+htTBColr+'height: 10px;"></td></tr>'+
                     '</td>'+
                 '</tr>'+
             '</tbody>';
+}
+
+
+if( tsImg.match(/.png/g) || tsImg.match(/.jpg/g) || tsImg.match(/.jpeg/g) || tsImg.match(/.gif/g) ){
+	//jpg, jpeg, png, gif
 
 //team image template
 teamimage = '<tr><td style="'+tsTBColr+'height: 10px;"></td></tr>'+
             '<tr>'+
                 '<td id="teamImage">'+                 
-                    '<img alt="Team Image" style="width:100%;" src="'+tsImg+'">'+
+                    '<img width="width: 900px" alt="Team Image" style="width:100%;" src="'+tsImg+'">'+
                 '</td>'+
             '</tr>';
-
+}
 //birthday and anniversary template
 
 var bday = '';  
 var fisrtTd = '<td style="padding:0 0 15px 0; text-align: center; width:20%">'+
               '<img alt="Birthday" src="images/common/Birtthday.png"></td>';   
-if(bdayfiles.length>0){
+if(bdayfiles && bdayfiles.length>0){
     bday = fisrtTd;
     for (var key in bdayfiles) {
         var createTd = '';
@@ -798,7 +841,7 @@ var aniv = '';
 var fisrtTd = '<td style="padding:0 0 15px 0; width: 20%; text-align: center">'+
               '<img alt="Anniversary" src="images/common/Anniversary.png"></td>';
 
-if(anivfiles.length>0){
+if(anivfiles && anivfiles.length>0){
     aniv = fisrtTd;
     for (var key in anivfiles) {
         var createTd = '';
@@ -810,24 +853,33 @@ if(anivfiles.length>0){
         aniv = aniv + createTd;                                    
     }
 }
- 
+if(bday || aniv){
+	
+
 bDayandAnniversary = '<tr><td style="'+bdTBColr+'height: 10px;"></td></tr>'+
             '<tr id="trophy" style="'+bdbgcolor+'">'+
                 '<td style="padding:15px;text-align:center;">'+
-                    '<table style="border: 0; border-collapse: collapse;font-family: Century Gothic; font-weight: bold; '+bdTxtColr+'width:100%">'+
-                        '<tr style="vertical-align:middle">'+
+                    '<table style="border: 0; border-collapse: collapse;font-family: Century Gothic; font-weight: bold; '+bdTxtColr+'width:100%">';
+					if(bday){
+						bDayandAnniversary = bDayandAnniversary +
+						'<tr style="vertical-align:middle">'+
                          bday+
-                        '</tr>'+
-                        '<tr style="vertical-align:middle">'+
+                        '</tr>';
+					}
+					if(aniv){
+						bDayandAnniversary = bDayandAnniversary +
+						'<tr style="vertical-align:middle">'+
                          aniv+   						
-                        '</tr>'+
+                        '</tr>';
+					}
+					bDayandAnniversary = bDayandAnniversary +                        
                     '</table>'+
                 '</td>'+
             '</tr>';
- //bDayandAnniversary = '';
-
+}
 //footer
-
+if(ftCncpt || ftExecn || ftEmail){
+	
 footersection = '<tr id="footersec" style="height: 46px;'+ftTxtColr+ftbgcolor+'">'+
         '<td style="padding:15px;">'+
             '<table style="float : right; margin-top: -10px;">'+
@@ -839,23 +891,20 @@ footersection = '<tr id="footersec" style="height: 46px;'+ftTxtColr+ftbgcolor+'"
             '</table>'+
             '<table style="border: 0; border-collapse: collapse;width:100%;font-family: Century Gothic;">'+            
                 '<tr>'+
-                    '<td><img alt="Graph" src="images/common/SR_Logo_RGB_W.png"></td>'+
+                    '<td><img alt="Graph" src="images/common/ps.png" width="100px"></td>'+
                     '<td style="text-align: right; font-size: 11px">'+
                     '<a style="'+ftTxtColr+'text-decoration: none;" href="mailto:'+ftEmail+'?Subject=Newsletter%20feedback" target="_top">CLICK HERE TO GIVE FEEDBACK</a></td>'+
                 '</tr>'+
             '</table>'+
         '</td>'+
     '</tr>';
- 
+}
+    
 
  //main body section
  body = '<table style="width: 900px;border: 0; border-collapse: collapse;font-family: Century Gothic; margin:0 auto 0 auto">'+
-            '<tr><td id="header-top" style="height: 17px;'+bnBrColr+'"></td></tr>'+
-            '<tr >'+
-                '<td id="header">'+                
-                    '<img alt="logo" src="'+bannerImg+'">'+
-                '</td>'+
-            '</tr>'+
+            '<tr><td id="header-top" style="height: 17px;'+bnBrColr+'"></td></tr>'+            
+            headerBg+
             businessArticle+
             businessUpdates+
             planned+
